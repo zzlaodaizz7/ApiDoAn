@@ -19,31 +19,47 @@ function login :http://127.0.0.1:8000/api/login/
     }
 		
 Những Function cần đăng nhập mới có thể gọi:
+
   + Header Cần truyền: 
+	
     - Key: Authorization    ----  Value: Bearer + token(sau khi đăng nhập sẽ có)
-
-
+		
 Đội bóng:
-	+ Chi tiết đội: http://127.0.0.1:8000/api/chitietdoibong/{id} (GET) 
+
+	+ Chi tiết đội: http://127.0.0.1:8000/api/chitietdoibong/{id} (GET)
+	
 	+ Tạo đội bóng mới: 	http://127.0.0.1:8000/api/doibong/ (POST)
-		+ Header Cần truyền:
-		    - Key: Accept -------- Value: application/json
-		    - Key: value  -------- Value: application/json
-		    - Key: Authorization - Value: Bearer + token(sau khi đăng nhập sẽ có)
-		+ Body cần truyền: 
-		    - ten,trinhdo,user_id 
+	
+		- Header Cần truyền:
+		
+		    * Key: Accept -------- Value: application/json
+				
+		    * Key: value  -------- Value: application/json
+				
+		    * Key: Authorization - Value: Bearer + token(sau khi đăng nhập sẽ có)
+				
+		- Body cần truyền: 
+		
+		    * ten,trinhdo,user_id 
+				
 	+ Xin vào đội: 		http://127.0.0.1:8000/api/thanhvien/ (POST)
-		+ Header Cần truyền:
-		    - Key: Accept -------- Value: application/json
-		    - Key: value  -------- Value: application/json
-		    - Key: Authorization - Value: Bearer + token(sau khi đăng nhập sẽ có)
-		+ Body cần truyền: 
-		    - doibong_id,user_id
+	
+		- Header Cần truyền:
+		
+		    * Key: Accept -------- Value: application/json
+				
+		    * Key: value  -------- Value: application/json
+				
+		    * Key: Authorization - Value: Bearer + token(sau khi đăng nhập sẽ có)
+				
+		- Body cần truyền: 
+		
+		    * doibong_id,user_id
 	+ Xác nhận người vào đội: http://127.0.0.1:8000/api/thanhvien/id(bản ghi)  (PUT/PATCH)
+	
 	+ Kick thành viên: http://127.0.0.1:8000/api/thanhvien/id(bản ghi)  (DELETE)
+	
 	+ Danh sách xin vào đội: http://127.0.0.1:8000/api/doibong/{id} (GET)
+	
 	+ Danh sách thành viên: http://127.0.0.1:8000/api/danhsachthanhvien/{id} (GET)
 
-	
-		
-    
