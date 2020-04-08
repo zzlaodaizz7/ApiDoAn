@@ -1,12 +1,21 @@
 function login :http://127.0.0.1:8000/api/login/
+
   + Header Cần truyền:
+  
     - Key: Accept -------- Value: application/json
+    
     - Key: value  -------- Value: application/json
+    
   + Body:
+  
   	- email,password
+	
   + Đăng nhập lỗi sẽ trả ra json: 
+  
     {
+    
         "message": "Unauthenticated."
+	
     }
   + Đăng nhập thành công sẽ trả json: (ví dụ)
 	
