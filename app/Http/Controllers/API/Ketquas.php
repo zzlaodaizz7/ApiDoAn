@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\dangtin;
-use Response;
-class Dangtins extends Controller
+
+class Ketquas extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,6 @@ class Dangtins extends Controller
     public function index()
     {
         //
-        return dangtin::all();
     }
 
     /**
@@ -35,35 +33,9 @@ class Dangtins extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $req)
+    public function store(Request $request)
     {
         //
-        $a = dangtin::where([
-            ['doidangtin_id','=',$req->doidangtin_id],
-            ['ngay','=',$req->ngay],
-            ['khunggio_id','=',$req->khunggio_id]
-        ])->count();
-        if ($a != 0) {
-            return Response::json([
-                'type' => 'error',
-                'title' => 'Lỗi!',
-                'content' => 'Đăng tin trùng ngày và khung giờ',
-            ]);
-        }else{
-            $dangtin = new dangtin;
-            $dangtin->doidangtin_id = $req->doidangtin_id;
-            $dangtin->ngay = $req->ngay;
-            $dangtin->keo = $req->keo;
-            $dangtin->san_id = $req->san_id;
-            $dangtin->khunggio_id = $req->khunggio_id;
-            if ($dangtin->save()) {
-                return Response::json([
-                    'type' => 'success',
-                    'title' => 'Thành công!',
-                    'content' => 'Đăng tin thành công',
-                ]);
-            };
-        }
         
     }
 
@@ -76,7 +48,6 @@ class Dangtins extends Controller
     public function show($id)
     {
         //
-        return dangtin::find($id)->batdoi;
     }
 
     /**
@@ -100,9 +71,6 @@ class Dangtins extends Controller
     public function update(Request $request, $id)
     {
         //
-        $dangtin = dangtin::find($id);
-        $dangtin->doibatdoi_id = $request->doibatdoi_id;
-        $dangtin->save();
     }
 
     /**

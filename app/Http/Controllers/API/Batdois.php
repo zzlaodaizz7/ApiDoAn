@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\batdoi;
+use App\dangtin;
+use App\doibong;
+use App\thongbao;
+use App\User;
 use Response;
 class Batdois extends Controller
 {
@@ -92,8 +96,39 @@ class Batdois extends Controller
     public function update(Request $request, $id)
     {
         //
+        $a = batdoi::find($id);
+        $b = dangtin::find($a->dangtin_id);
+        $b->doibatdoi_id = $a->doibatdoi_id;
+        $b->save();
+        $cacthanhvientimdoi = doibong::find($a->doitimdoi_id)->member->where('trangthai',1);
+        $cacthanhvienbatdoi = doibong::find($a->doibatdoi_id)->member->where('trangthai',1);
+        $tentimdoi=doibong::find($a->doitimdoi_id)->ten;
+        $tenbatdoi=doibong::find($a->doibatdoi_id)->ten;
+        for ($i=0; $i < $cacthanhvientimdoi->count(); $i++) { 
+            $thongbao = new thongbao;
+            $thongbao->noidung = "Bắt đối thành công với {$tenbatdoi}";
+            $thongbao->user_id = $cacthanhvientimdoi[$i]->user_id;
+            $thongbao->trangthai = 0;
+            $c = User::find($cacthanhvientimdoi[$i]->user_id)->device;
+            $thongbao->device = $c;
+            $thongbao->save();
+        }
+        for ($i=0; $i < $cacthanhvienbatdoi->count(); $i++) { 
+            $thongbao = new thongbao;
+            $thongbao->noidung = "Bắt đối thành công với {$tentimdoi}";
+            $thongbao->user_id = $cacthanhvienbatdoi[$i]->user_id;
+            $thongbao->trangthai = 0;
+            $c = User::find($cacthanhvienbatdoi[$i]->user_id)->device;
+            $thongbao->device = $c;
+            $thongbao->save();
+        }
+        $d = batdoi::where('dangtin_id',$a->dangtin_id)->delete();
+        return Response::json([
+                    'type' => 'success',
+                    'title' => 'Thành công!',
+                    'content' => 'Bắt đối thành công!',
+                ]);
     }
-
     /**
      * Remove the specified resource from storage.
      *

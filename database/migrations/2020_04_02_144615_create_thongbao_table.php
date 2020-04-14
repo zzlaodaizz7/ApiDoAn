@@ -17,6 +17,7 @@ class CreateThongbaoTable extends Migration
             $table->id();
             $table->string('noidung');
             $table->integer('user_id');
+            $table->string('imei');
             $table->integer('loaithongbao')->default(0);
             $table->integer('trangthai')->default(0)->comment('0-chưa đọc ++++ 1-đã đọc');
             $table->timestamps();

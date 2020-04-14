@@ -44,7 +44,14 @@ class Sanbongs extends Controller
         $sanbong->sdt = $req->sdt;
         $sanbong->ten = $req->ten;
         $sanbong->link = $req->link;
-        $sanbong->save();
+        
+        if ($sanbong->save()) {
+            return Response::json([
+                    'type' => 'Success',
+                    'title' => 'Thành công!',
+                    'content' => 'Bắt đối thành công!',
+                ]);
+        }
     }
 
     /**

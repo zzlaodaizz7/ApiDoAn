@@ -73,16 +73,9 @@ class Doibongs extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $req,$id)
+    public function show($id)
     {
-        //
-        if ($req->thanhvien) {
-            return doibong::find($id)->member->where('trangthai',1);
-        }else if ($req->chitiet){
-            return doibong::find($id);
-        }else if($req->xinvao) {
-            return doibong::find($id)->member->where('trangthai',0);
-        }
+        return doibong::find($id)->member->where('trangthai',0);
     }
 
     /**

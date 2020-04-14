@@ -94,26 +94,25 @@ class DoibongNguoidung extends Controller
     public function update(Request $request, $id)
     {
         //
-        if ($request->xacnhan) {
-            $a = doibong_nguoidung::find($id);
-            $a->trangthai = 1;
-            if($a->save()){
-                return Response::json([
-                    'type' => 'success',
-                    'title' => 'Thành công!',
-                    'content' => 'Thêm thành viên thành công!',
-                ]);
-            }else{
-                return Response::json([
-                    'type' => 'error',
-                    'title' => 'Lỗi!',
-                    'content' => 'Xin vui lòng thử lại sau!',
-                ]);
+        $a = doibong_nguoidung::find($id);
+        $a->trangthai = 1;
+        if($a->save()){
+            return Response::json([
+                'type' => 'success',
+                'title' => 'Thành công!',
+                'content' => 'Thêm thành viên thành công!',
+            ]);
+        }else{
+            return Response::json([
+                'type' => 'error',
+                'title' => 'Lỗi!',
+                'content' => 'Xin vui lòng thử lại sau!',
+            ]);
 
-            }
         }
-        
     }
+        
+    
 
     /**
      * Remove the specified resource from storage.

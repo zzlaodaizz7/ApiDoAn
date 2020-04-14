@@ -15,14 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
-// 	
 //     return $request->user();
 // });
 //////////
 Route::post('login', 'API\Nguoidungs@login');
 Route::post('register', 'API\Nguoidungs@register');
-
-
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::resource('dangtin','API\Dangtins');
 	Route::resource('doibong','API\Doibongs');
@@ -31,8 +28,10 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::resource('khunggio','API\Khunggios');
 });
 
-
 Route::resource('nguoidung','API\Nguoidungs');
 Route::resource('sanbong','API\Sanbongs');
 // Route::resource('phanquyen','API\PhanQuyens');
+Route::get('chitietdoibong/{id}','API\Chitietdoibongs@chitiet');
+Route::get('danhsachthanhvien/{id}','API\Chitietdoibongs@dsthanhvien');
+Route::resource('ketqua','API\ketquas');
 

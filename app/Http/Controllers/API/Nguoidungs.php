@@ -110,7 +110,9 @@ class Nguoidungs extends Controller
     public function login(){ 
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){ 
             $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')-> accessToken; 
+            $success['token'] =  $user->createToken('MyApp')-> accessToken;
+            $success['ten'] = $user->ten;
+            $success['id']  = $user->id;
             return response()->json(['success' => $success], $this-> successStatus); 
         }
         else{ 
@@ -123,9 +125,15 @@ class Nguoidungs extends Controller
         $validator = Validator::make($request->all(), [ 
             'ten' => 'required', 
             'email' => 'required|email', 
-            'password' => 'required', 
+            'password' => 'required',
             // 'c_password' => 'required|same:matkhau', 
-        ]);
+        ],
+        [   
+            'ten.required'      => 'Tên không được để trống!',
+            'email.email'       => 'Sai định dạng email!',
+            'email.required'    => 'Email không được để trống!'
+        ]
+        );
         if ($validator->fails()) { 
                     return response()->json(['error'=>$validator->errors()], 401);            
                 }
