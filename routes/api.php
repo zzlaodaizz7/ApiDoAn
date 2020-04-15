@@ -33,5 +33,6 @@ Route::resource('sanbong','API\Sanbongs');
 // Route::resource('phanquyen','API\PhanQuyens');
 Route::get('chitietdoibong/{id}','API\Chitietdoibongs@chitiet');
 Route::get('danhsachthanhvien/{id}','API\Chitietdoibongs@dsthanhvien');
+Route::get('doitruongcacdoi/{id}','API\Chitietdoibongs@list');
 Route::resource('ketqua','API\ketquas');
 
