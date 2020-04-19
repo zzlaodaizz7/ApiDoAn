@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\doibong;
+use App\doibong_nguoidung;
 class Chitietdoibongs extends Controller
 {
     //
@@ -23,7 +24,6 @@ class Chitietdoibongs extends Controller
     		$sll++;
     		echo doibong::find($value->doibong_id);
     		if($sll != $sl) echo ",";
-    		
     	}
     	echo "]";
     }

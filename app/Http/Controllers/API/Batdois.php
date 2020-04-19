@@ -9,6 +9,7 @@ use App\dangtin;
 use App\doibong;
 use App\thongbao;
 use App\User;
+use App\doibong_nguoidung;
 use Response;
 class Batdois extends Controller
 {
@@ -41,28 +42,27 @@ class Batdois extends Controller
      */
     public function store(Request $req)
     {
-        //
+        echo $req;
         $batdoi = new batdoi;
         $batdoi->dangtin_id = $req->dangtin_id;
         $batdoi->doitimdoi_id = $req->doitimdoi_id;
         $batdoi->doibatdoi_id = $req->doibatdoi_id;
+        $tentimdoi = doibong::find($req->doibatdoi_id)->ten;
         $batdoi->trangthai = 0;
-        if ($batdoi->save()) {
-            return Response::json([
-                    'type' => 'success',
-                    'title' => 'Thành công!',
-                    'content' => 'Bắt đối thành công!',
-                ]);
-        }else{
-            return Response::json([
-                'type' => 'error',
-                'title' => 'Lỗi!',
-                'content' => 'Bắt đối lỗi xin vui lòng thử lại sau!',
-            ]);
-
-        }
+        $batdoi->save();
+        $thongbao = new thongbao;
+        $thongbao->noidung = "Đội {$tentimdoi} muốn đá với đội bạn";
+        $thongbao->user_id = doibong_nguoidung::where([["phanquyen_id",1],["doibong_id",$req->doitimdoi_id]])->first()->user_id;
+        $thongbao->trangthai = 0;
+        $c = User::find(doibong_nguoidung::where([["phanquyen_id",1],["doibong_id",$req->doitimdoi_id]])->first()->user_id)->device;
+        $thongbao->device = $c;
+        $thongbao->save();
+        return Response::json([
+            'type' => 'success',
+            'title' => 'Thành công!',
+            'content' => 'Bắt đối thành công, chờ phản hồi từ đội bạn',
+        ]);
     }
-
     /**
      * Display the specified resource.
      *
