@@ -113,7 +113,16 @@ class Nguoidungs extends Controller
             $success['token'] =  $user->createToken('MyApp')-> accessToken;
             $success['ten'] = $user->ten;
             $success['id']  = $user->id;
-            return response()->json(['success' => $success], $this-> successStatus); 
+            return response()->json([
+                'token' => $user->createToken('MyApp')-> accessToken,
+                'ten'   => $user->ten,
+                'id'    => $user->id,
+                'email' => $user->email,
+                'device'=> $user->device,
+                'sdt'   => $user->sdt,
+                'anhbia'=> $user->anhbia,
+                'created_at'=>$user->created_at
+                                    ], $this-> successStatus); 
         }
         else{ 
             return response()->json(['error'=>'Unauthorised'], 401); 

@@ -63,6 +63,7 @@ class Sanbongs extends Controller
     public function show($id)
     {
         //
+        return sanbong::find($id);
     }
 
     /**

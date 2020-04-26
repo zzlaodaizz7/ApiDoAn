@@ -42,16 +42,29 @@ class Batdois extends Controller
      */
     public function store(Request $req)
     {
+<<<<<<< HEAD
         echo $req;
+=======
+>>>>>>> e7a4fa2... update vote ket qua
         $batdoi = new batdoi;
         $batdoi->dangtin_id = $req->dangtin_id;
         $batdoi->doitimdoi_id = $req->doitimdoi_id;
         $batdoi->doibatdoi_id = $req->doibatdoi_id;
+<<<<<<< HEAD
         $tentimdoi = doibong::find($req->doibatdoi_id)->ten;
         $batdoi->trangthai = 0;
         $batdoi->save();
         $thongbao = new thongbao;
         $thongbao->noidung = "Đội {$tentimdoi} muốn đá với đội bạn";
+=======
+        $ngay = dangtin::find($req->dangtin_id)->created_at;
+        $tentimdoi = doibong::find($req->doibatdoi_id)->ten;
+        $tendangtin = doibong::find($req->doitimdoi_id)->ten;
+        $batdoi->trangthai = 0;
+        $batdoi->save();
+        $thongbao = new thongbao;
+        $thongbao->noidung = "Đội {$tentimdoi} muốn đá với đội {$tendangtin} của bạn ngày {$ngay}";
+>>>>>>> e7a4fa2... update vote ket qua
         $thongbao->user_id = doibong_nguoidung::where([["phanquyen_id",1],["doibong_id",$req->doitimdoi_id]])->first()->user_id;
         $thongbao->trangthai = 0;
         $c = User::find(doibong_nguoidung::where([["phanquyen_id",1],["doibong_id",$req->doitimdoi_id]])->first()->user_id)->device;
@@ -61,6 +74,10 @@ class Batdois extends Controller
             'type' => 'success',
             'title' => 'Thành công!',
             'content' => 'Bắt đối thành công, chờ phản hồi từ đội bạn',
+<<<<<<< HEAD
+=======
+            'doitruong_id' =>  $thongbao->user_id
+>>>>>>> e7a4fa2... update vote ket qua
         ]);
     }
     /**
@@ -72,7 +89,26 @@ class Batdois extends Controller
     public function show($id)
     {
         //
-        
+        $a = batdoi::where("dangtin_id",$id)->get();
+        // echo "[";
+        // $sl = $a->count();
+        // $sll = 0;
+        $listdata = [];
+        foreach ($a as $key => $value) {
+            // $sll++;
+            // echo $key;
+            $z = doibong::find($value->doibatdoi_id);
+            array_push($listdata,$z);
+            // echo $z['id'];
+            // if($sll != $sl) echo ",";
+        }
+        // echo "]";
+        json_encode($listdata);
+        foreach ($a as $key => $value) {
+            $listdata[$key]['batdoi_id'] = $value->id;
+        }
+        json_encode($listdata);
+        return $listdata;
     }
 
     /**

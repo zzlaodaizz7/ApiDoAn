@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('device')->nullable();
             $table->string('sdt',16)->nullable();
             $table->string('anhbia')->nullable();
+          
             $table->rememberToken();
             $table->timestamps();
         });

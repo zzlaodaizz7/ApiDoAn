@@ -9,5 +9,5 @@ class doibong_nguoidung extends Model
     //
     protected $table = "doibong_nguoidung";
 
-    protected $fillable=[ 'id', 'id_doibong', 'id_nguoidung', 'id_phanquyen','trangthai'];
+    protected $fillable=[ 'id', 'doibong_id', 'nguoidung_id', 'phanquyen_id','trangthai'];
 }

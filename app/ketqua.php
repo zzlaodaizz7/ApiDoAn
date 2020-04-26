@@ -9,5 +9,5 @@ class ketqua extends Model
     //
     protected $table = "ketqua";
 
-    protected $fillable=[ 'id', 'id_doidangtin', 'banthanga', 'id_doibatdoi', 'banthangb','hkdoidangtin','hkdoibatdoi'];
+    protected $fillable=[ 'id', 'dangtin_id', 'doidangtin', 'doibatdoi'];
 }

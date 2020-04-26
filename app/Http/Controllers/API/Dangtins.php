@@ -16,7 +16,6 @@ class Dangtins extends Controller
     public function index()
     {
         //
-        return dangtin::all();
     }
 
     /**
@@ -114,5 +113,11 @@ class Dangtins extends Controller
     public function destroy($id)
     {
         //
+        $a = dangtin::find($id)->delete();
+        return Response::json([
+            'type' => 'success',
+            'title' => 'Thành công!',
+            'content' => 'Xóa thành công',
+        ]);
     }
 }
